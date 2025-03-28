@@ -1,0 +1,99 @@
+local TweenService = game:GetService("TweenService")
+
+-- Allow script name and loadstring to be editable via getgenv
+getgenv().scriptName = getgenv().scriptName or "T Script"
+getgenv().closeAction = getgenv().closeAction or "print('Closed with animation!')"
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Label1 = Instance.new("TextLabel")
+local Label2 = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+local UICornerClose = Instance.new("UICorner")
+
+ScreenGui.Parent = game:GetService("CoreGui")
+
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.Position = UDim2.new(0, 0, 0, 0)
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.Parent = ScreenGui
+
+Label1.Size = UDim2.new(0, 400, 0, 50)
+Label1.Position = UDim2.new(0.5, -200, -0.2, 0)
+Label1.BackgroundTransparency = 1
+Label1.TextScaled = true
+Label1.Font = Enum.Font.SourceSansBold
+Label1.TextColor3 = Color3.new(1, 1, 1)
+Label1.Text = "Made By UnknownDS"
+Label1.Parent = Frame
+
+-- Use the scriptName from getgenv for Label2
+Label2.Size = UDim2.new(0, 200, 0, 50)
+Label2.Position = UDim2.new(0.5, -100, -0.15, 0)
+Label2.BackgroundTransparency = 1
+Label2.TextScaled = true
+Label2.Font = Enum.Font.SourceSansBold
+Label2.TextColor3 = Color3.new(1, 1, 1)
+Label2.Text = getgenv().scriptName
+Label2.Parent = Frame
+
+CloseButton.Size = UDim2.new(0, 120, 0, 40)
+CloseButton.Position = UDim2.new(0.5, -60, 0.6, 0)
+CloseButton.BackgroundColor3 = Color3.new(1, 0, 0)
+CloseButton.Text = "Close"
+CloseButton.TextScaled = true
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.Parent = Frame
+
+UICornerClose.CornerRadius = UDim.new(0, 10)
+UICornerClose.Parent = CloseButton
+
+local label1Fall = TweenService:Create(Label1, TweenInfo.new(1, Enum.EasingStyle.Bounce), { Position = UDim2.new(0.5, -200, 0.4, -30) })
+local label2Fall = TweenService:Create(Label2, TweenInfo.new(1, Enum.EasingStyle.Bounce), { Position = UDim2.new(0.5, -100, 0.45, 0) })
+local closeFall = TweenService:Create(CloseButton, TweenInfo.new(1, Enum.EasingStyle.Bounce), { Position = UDim2.new(0.5, -60, 0.6, 0) })
+
+label1Fall:Play()
+label2Fall:Play()
+closeFall:Play()
+
+CloseButton.MouseButton1Click:Connect(function()
+    local labelFade1 = TweenService:Create(Label1, TweenInfo.new(1, Enum.EasingStyle.Quad), { Position = UDim2.new(0.5, -200, 0.2, -30), TextTransparency = 1 })
+    local labelFade2 = TweenService:Create(Label2, TweenInfo.new(1, Enum.EasingStyle.Quad), { Position = UDim2.new(0.5, -100, 0.25, 0), TextTransparency = 1 })
+    local closeFade = TweenService:Create(CloseButton, TweenInfo.new(1, Enum.EasingStyle.Quad), { Position = UDim2.new(0.5, -60, 1.2, 0), BackgroundTransparency = 1, TextTransparency = 1 })
+
+    labelFade1:Play()
+    labelFade2:Play()
+    closeFade:Play()
+
+    wait(1.2)
+    ScreenGui:Destroy()
+
+    -- Execute the loadstring stored in getgenv().closeAction
+    loadstring(getgenv().closeAction)()  
+end)
+
+local function createStar()
+    local star = Instance.new("Frame")
+    star.Size = UDim2.new(0, math.random(2, 5), 0, math.random(2, 5))
+    star.Position = UDim2.new(math.random(), 0, -0.1, 0)
+    star.BackgroundColor3 = Color3.new(1, 1, 1)
+    star.BackgroundTransparency = 0
+    star.Parent = Frame
+
+    local starTween = TweenService:Create(
+        star,
+        TweenInfo.new(math.random(3, 6), Enum.EasingStyle.Linear),
+        { Position = UDim2.new(star.Position.X.Scale, 0, 1.1, 0), BackgroundTransparency = 1 }
+    )
+
+    starTween:Play()
+    starTween.Completed:Connect(function()
+        star:Destroy()
+    end)
+end
+
+while true do
+    createStar()
+    wait(math.random(0.1, 0.3))
+end
