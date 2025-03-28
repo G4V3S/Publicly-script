@@ -70,7 +70,7 @@ CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 
     -- Execute the loadstring stored in getgenv().closeAction
-    loadstring(getgenv().closeAction)()  
+    loadstring(getgenv().closeAction)()  -- This is the loadstring execution for the closeAction
 end)
 
 local function createStar()
