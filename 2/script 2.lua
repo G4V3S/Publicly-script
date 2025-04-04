@@ -1,7 +1,7 @@
 getgenv().settings = {
   FarmCooldown = "1",
   ExtraAutofarm= "false",
-  ExtraFarmCombo= "1",
+  ExtraFarmCombo= "5",
   autosell = false,
 
   LandConfig={
