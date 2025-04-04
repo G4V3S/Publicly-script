@@ -1,7 +1,7 @@
 getgenv().settings = {
   FarmCooldown = "1",
   ExtraAutofarm= "false",
-  ExtraFarmCombo= "5",
+  ExtraFarmCombo= "3",
   autosell = false,
 
   LandConfig={
@@ -11,8 +11,8 @@ getgenv().settings = {
       FarmMultiplier= "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
   },
   WalljumpConfig={
-      MinBoost= "0",
-      MaxBoost= "2",
+      MinBoost= "2",
+      MaxBoost= "3",
       ExtraMS= tostring(math.random(2100000000,2100000000)),
       FarmMultiplier= "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
   }
